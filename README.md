@@ -11,3 +11,5 @@ yarn start
 cd client 
 yarn start
 ```
+
+https://www.youtube.com/watch?v=fmz4AndU2HI
