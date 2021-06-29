@@ -3,6 +3,7 @@ import Product from './Product';
 import { useGetProducts } from '../operations/queries/getProducts';
 import {selectAllProduct} from "../operations/mutations/selectAllProduct";
 
+// for fake routing
 const urlSearchParams = new URLSearchParams(window.location.search);
 
 const ProductList = () => {

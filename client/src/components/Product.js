@@ -8,12 +8,15 @@ const Product = ({ product, view }) => {
 
   const handleToggleView = () => {
     if (!isDetailVisible && !product.detail) {
+      // fetch product detail from remote
+
       setLoading(true);
       getProductDetail(product).then(() => {
         setLoading(false);
       });
     }
 
+    // toggle detail visibility
     setDetailVisible(!isDetailVisible);
   };
 
