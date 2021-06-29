@@ -17,6 +17,7 @@ export const useGetProducts = view => {
       .query({
         query: GET_PRODUCTS,
         variables: { view },
+        fetchPolicy: 'network'
       })
       .then(() => setLoading(false));
   }, [view]);
