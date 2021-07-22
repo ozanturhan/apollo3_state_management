@@ -1,10 +1,11 @@
-import { useLazyQuery } from '@apollo/client';
+import {useLazyQuery, useQuery} from '@apollo/client';
 import { GET_PRODUCT_DETAIL } from '../../queries';
 
-export const useGetProductDetail = product => {
-  const [getProductDetail, result] = useLazyQuery(GET_PRODUCT_DETAIL, {
+export const useGetProductDetail = (product, isDetailVisible) => {
+  const { loading } = useQuery(GET_PRODUCT_DETAIL, {
     variables: { id: product.id },
+    skip: (!isDetailVisible && !product.detail) || product.detail
   });
 
-  return [getProductDetail, result];
+  return loading;
 };

@@ -4,18 +4,14 @@ import { selectProduct } from '../operations/mutations/selectProduct';
 
 const Product = ({ product, view }) => {
   const [isDetailVisible, setDetailVisible] = useState(view === 'detailed');
-  const [getProductDetail, {loading}] = useGetProductDetail(product);
+  const loading = useGetProductDetail(product, isDetailVisible);
 
   useEffect(() => {
     setDetailVisible(view === 'detailed');
   }, [view]);
 
-  const handleToggleView = () => {
-    if (!isDetailVisible && !product.detail) {
-      getProductDetail();
-    }
 
-    // toggle detail visibility
+  const handleToggleView = () => {
     setDetailVisible(!isDetailVisible);
   };
 
