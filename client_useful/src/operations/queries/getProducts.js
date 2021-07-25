@@ -1,32 +1,23 @@
 import { useQuery } from '@apollo/client';
-import { client } from '../../apolloClient';
+import {useEffect} from 'react';
 import { GET_PRODUCTS } from '../../queries';
 
 export const useGetProducts = view => {
-  const { data, loading } = useQuery(GET_PRODUCTS, {
+  const { data, loading, refetch } = useQuery(GET_PRODUCTS, {
     variables: { view },
-    onCompleted: result => {
-      if (view === 'detailed') {
-        const existingCompactData = client.readQuery({
-          query: GET_PRODUCTS,
-          variables: { view: 'compact' },
-        });
-
-        if (!existingCompactData) {
-          client.writeQuery({
-            query: GET_PRODUCTS,
-            variables: { view: 'compact' },
-            data: result,
-          });
-        }
-      }
-    },
+    notifyOnNetworkStatusChange: true,
   });
 
+  // Refetch for detailed view once
+  useEffect(() => {
+    if (view === 'detailed' && data?.products?.view !== 'detailed') {
+      refetch();
+    }
+  }, [view, data?.products]);
 
   return {
     data,
-    isAllSelected: data?.products.every(item => item.selected),
+    isAllSelected: data?.products.items.every(item => item.selected),
     loading,
   };
 };

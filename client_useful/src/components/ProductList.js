@@ -47,7 +47,7 @@ const ProductList = () => {
         <div>Loading...</div>
       ) : (
         <div className="container">
-          {data?.products?.map(product => (
+          {data?.products?.items?.map(product => (
             <Product
               key={product.id}
               defaultViewMode={viewMode}

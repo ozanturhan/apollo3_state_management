@@ -15,12 +15,15 @@ export const GET_PRODUCT_DETAIL = gql`
 export const GET_PRODUCTS = gql`
   query GetProducts($view: String) {
     products(view: $view) {
-      id
-      title
-      selected @client
-      detail {
-        price
-        discount
+      view
+      items {
+        id
+        title
+        selected @client
+        detail {
+          price
+          discount
+        }
       }
     }
   }

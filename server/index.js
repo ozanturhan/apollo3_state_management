@@ -12,6 +12,11 @@ const typeDefs = gql`
         title: String
         detail: ProductDetail
     }
+    
+    type Products {
+        view: String!
+        items: [Product]
+    }
 
     type ProductDetail {
         price: String
@@ -22,7 +27,7 @@ const typeDefs = gql`
     # clients can execute, along with the return type for each. In this
     # case, the "books" query returns an array of zero or more Books (defined above).
     type Query {
-        products(view: String): [Product]
+        products(view: String): Products
         productDetail(id: ID): Product
     }
 `;
@@ -67,15 +72,20 @@ const resolvers = {
             await new Promise(resolve => setTimeout(resolve, 2000));
 
             if (view === 'compact') {
-                return products;
+                return {
+                    view: 'compact',
+                    items: products
+                };
             }
 
-            return products.map(product => ({...product, detail: productDetails[`product_${product.id}`]}))
+            return {
+                view: 'detailed',
+                items: products.map(product => ({...product, detail: productDetails[`product_${product.id}`]}))
+            }
         },
         productDetail: async (_, { id }) => {
             await new Promise(resolve => setTimeout(resolve, 2000));
             const product = products.find(product => product.id === +id);
-            console.log({product});
             return {...product, detail: productDetails[`product_${id}`]}
         },
     },
