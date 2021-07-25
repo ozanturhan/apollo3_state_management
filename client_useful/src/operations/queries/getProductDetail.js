@@ -1,6 +1,6 @@
-import {useLazyQuery} from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { GET_PRODUCT_DETAIL } from '../../queries';
-import {useEffect, useState} from "react";
+import { useEffect, useState } from 'react';
 
 export const useGetProductDetail = (product, view) => {
   const [isDetailVisible, setDetailVisible] = useState(view === 'detailed');
@@ -10,8 +10,8 @@ export const useGetProductDetail = (product, view) => {
   }, [view]);
 
   const [getProductDetail, { loading }] = useLazyQuery(GET_PRODUCT_DETAIL, {
-    variables: { id: product.id }
+    variables: { id: product.id },
   });
 
-  return {getProductDetail, loading, isDetailVisible, setDetailVisible};
+  return { getProductDetail, loading, isDetailVisible, setDetailVisible };
 };

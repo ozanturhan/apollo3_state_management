@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import { GET_PRODUCTS } from '../../queries';
 
 export const useGetProducts = view => {

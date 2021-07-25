@@ -14,10 +14,10 @@ export const cache = new InMemoryCache({
     Query: {
       fields: {
         products: {
-          keyArgs: false
-        }
-      }
-    }
+          keyArgs: false,
+        },
+      },
+    },
   },
 });
 

@@ -1,13 +1,15 @@
 import { useGetProductDetail } from '../operations/queries/getProductDetail';
-import { useState, useEffect } from 'react';
 import { selectProduct } from '../operations/mutations/selectProduct';
 
 const Product = ({ product, view }) => {
-  const {getProductDetail, loading, isDetailVisible, setDetailVisible } = useGetProductDetail(product, view);
+  const { getProductDetail, loading, isDetailVisible, setDetailVisible } = useGetProductDetail(
+    product,
+    view,
+  );
 
   const handleToggleView = () => {
     if (!isDetailVisible && !product.detail) {
-      getProductDetail()
+      getProductDetail();
     }
 
     setDetailVisible(!isDetailVisible);
